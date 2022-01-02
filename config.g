@@ -35,7 +35,7 @@ M208 X510 Y500 Z500 S0                                ; set axis maxima
 ; Endstops
 M574 X1 S1 P"121.io2.in"                              ; configure active-high endstop for low end on X via pin 121.io2.in
 M574 Y2 S1 P"io4.in"                                  ; configure active-high endstop for high end on Y via pin io4.in
-M591 D0 P3 C"121.io1.in"  S0 R10:200 L22.00 E3.0 	    ; Duet3D rotating magnet sensor for extruder drive 0 is connected to E0 
+M591 D0 P3 C"121.io1.in"  S0 R70:130 L22.00 E3.0 	    ; Duet3D rotating magnet sensor for extruder drive 0 is connected to E0 
                                                       ; endstop input, enabled, sensitivity 24.8mm.rev, 70% to 130% tolerance, 3mm detection length  
 
 ; Z-Probe
