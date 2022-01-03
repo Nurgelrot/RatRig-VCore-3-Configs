@@ -22,10 +22,12 @@ M569 P0.4 S1                                          ; physical drive 0.2 X goe
 M584 X0.4 Y0.3 Z0.0:0.1:0.2 E121.0                    ; set drive mapping
 M350 X16 Y16 Z16 E16 I1                               ; configure microstepping with interpolation
 M92 X80.00 Y80.00 Z800.00 E400                        ; set steps per mm
-M566 X1200.00 Y1200.00 Z50.00 E2000.00                ; set maximum instantaneous speed changes (mm/min)
-M203 X9000.00 Y9000.00 Z300.00 E6000.00               ; set maximum speeds (mm/min)
+M566 X400.00 Y400.00 Z6.00 E3600.00                   ; set maximum instantaneous speed changes (mm/min)
+M203 X9000.00 Y9000.00 Z300.00 E3600.00               ; set maximum speeds (mm/min)
+;M203 X10800.00 Y10800.00 Z1000.00 E3600.00           ; Kick it up when you have it mech sound-Nurg set maximum speeds (mm/min)
 M201 X500.00 Y500.00 Z200.00 E2000.00                 ; set accelerations (mm/s^2)
-M906 X1000 Y1000 Z1000 E600 I30                       ; set motor currents (mA) and motor idle factor in per cent
+;M201 X3000.00 Y3000.00 Z100.00 E3600.00              ; Kick it up when you have it mech sound-Nurg set accelerations (mm/s^2) 
+M906 X1000 Y1000 Z1100 E600 I30                       ; Z is ver heavy on 500 i needed 1100 set motor currents (mA) and motor idle factor in per cent
 M84 S30                                               ; Set idle timeout
 
 ; Axis Limits
