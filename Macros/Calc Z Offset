@@ -33,7 +33,7 @@ M564 S0 H0 ; Allow movement beyond limits
 
 ;M280 P0 S160 I1 ; reset BL Touch
 G4 S0.5
-;M98 P"0:/sys/retractprobe.g" ; Ensure probe is retracted & reset
+M98 P"0:/sys/retractprobe.g" ; Ensure probe is retracted & reset
 G4 S0.5
 M561 ; clear any bed transform
 
@@ -53,12 +53,12 @@ echo "Current probe offset = " ^ sensors.probes[0].triggerHeight ^ "mm"
 
 while iterations < var.NumTests
 	G1 Z{sensors.probes[0].diveHeight} ; move to dive height
-	;if sensors.probes[0].value[0]=1000 ; if probe is in error state
-		;echo "Probe in error state- resetting"
-		;M280 P0 S160 I1 ; reset BL Touch
-		;G4 S0.5
-		;M98 P"0:/sys/retractprobe.g" ; Ensure probe is retracted & reset
-		;G4 S0.5
+	if sensors.probes[0].value[0]=1000 ; if probe is in error state
+		echo "Probe in error state- resetting"
+		M280 P0 S160 I1 ; reset BL Touch
+		G4 S0.5
+		M98 P"0:/sys/retractprobe.g" ; Ensure probe is retracted & reset
+		G4 S0.5
 	G30 S-1
 	M118 P2 S{"Test # " ^ (iterations+1) ^ " Triggered @ " ^ move.axes[2].machinePosition ^ "mm"} ; send trigger height to Paneldue console
 	M118 P3 S{"Test # " ^ (iterations+1) ^ " Triggered @ " ^ move.axes[2].machinePosition ^ "mm"} ; send trigger height to DWC console
