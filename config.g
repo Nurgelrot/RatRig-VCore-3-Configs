@@ -1,4 +1,4 @@
-; Configuration file for Duet 3 Mini 5+ (firmware version 3.3)
+; Configuration file for Duet 3 Mini 5+ (firmware version 3.3+)
 ; executed by the firmware on start-up
 ;
 ; Updated for RRF 3.4 -2 April 2022
