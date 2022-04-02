@@ -10,13 +10,13 @@ if !move.axes[0].homed or !move.axes[1].homed or !move.axes[2].homed
 while true
   if iterations = 5
     abort "Auto calibration repeated attempts ended, final deviation", move.calibration.final.deviation ^ "mm"
-  G30 P0 X5 Y10 Z-99999 ; probe near a leadscrew
+  G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
   if result != 0
     continue
   G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
   if result != 0
     continue
-  G30 P2 X460 Y10 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
+  G30 P2 X460 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
   if result != 0
     continue
   if move.calibration.initial.deviation <= 0.01
