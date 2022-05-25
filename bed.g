@@ -6,27 +6,23 @@ if !move.axes[0].homed or !move.axes[1].homed or !move.axes[2].homed
   echo "not all axes homed, homing axes first"
   G28
  
- 
-while true
-  if iterations = 5
-    abort "Auto calibration repeated attempts ended, final deviation", move.calibration.final.deviation ^ "mm"
-  G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
-  if result != 0
-    continue
-  G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
-  if result != 0
-    continue
-  G30 P2 X460 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
-  if result != 0
-    continue
-  if move.calibration.initial.deviation <= 0.01
-    break
-  echo "Repeating calibration because deviation is too high (" ^ move.calibration.initial.deviation ^ "mm)"
-; end loop
+G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
+G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
+G30 P2 X470 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
+echo "Current rough pass deviation: " ^ move.calibration.initial.deviation
 
-echo "Auto calibration successful, deviation", move.calibration.final.deviation ^ "mm"
+
+while move.calibration.initial.deviation > 0.005
+        if iterations >= 5
+			echo "Error: Max attemps failed. Deviation: " ^ move.calibration.initial.deviation
+			break
+        echo "Deviation over threshold. Executing pass" , iterations+1, "deviation", move.calibration.initial.deviation
+        G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
+		G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
+		G30 P2 X470 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
+        echo "Current deviation: " ^ move.calibration.initial.deviation
+        continue
+echo "Final deviation: " ^ move.calibration.initial.deviation
 G0 X250 Y250 Z10 F9000
-
 ; rehome Z as the absolute height of the z plane may have shifted
 G28 Z
-
