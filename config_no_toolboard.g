@@ -32,7 +32,7 @@ M208 X0 Y0 Z0 S1                                      ; set axis minima
 M208 X510 Y500 Z500 S0                                ; set axis maxima
 
 ; Endstops --- DO NOT USE IO 0 and 1 as shown in the RatRig Wireing Diag ---
-M574 X1 S1 P"i05.in"                                  ; configure active-high endstop for low end on X via pin io5.in
+M574 X1 S1 P"io5.in"                                  ; configure active-high endstop for low end on X via pin io5.in
 M574 Y2 S1 P"io6.in"                                  ; configure active-high endstop for high end on Y via pin io6.in
   
 
