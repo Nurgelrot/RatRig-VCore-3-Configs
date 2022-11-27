@@ -2,7 +2,7 @@ M290 R0 S0    ;  clear baby stepping
 M561          ;  reset all bed adjustments
 M400          ;  flush move queue
  
-if !move.axes[0].homed or !move.axes[1].homed or !move.axes[2].homed
+if !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed
   echo "not all axes homed, homing axes first"
   G28
  
