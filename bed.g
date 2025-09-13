@@ -9,13 +9,13 @@ if !move.axes[0].homed || !move.axes[1].homed || !move.axes[2].homed
 G1 Z15 ;F2000
 M401 
 G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
-G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
+G30 P1 X250 Y465 Z-99999 ; probe near a leadscrew
 G30 P2 X470 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
 echo "Current rough pass deviation: " ^ move.calibration.initial.deviation
 
 M558 H5 F300
 G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
-G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
+G30 P1 X250 Y470 Z-99999 ; probe near a leadscrew
 G30 P2 X470 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
 echo "Current rough pass deviation: " ^ move.calibration.initial.deviation
 
@@ -26,7 +26,7 @@ while move.calibration.initial.deviation > 0.005
 			break
         echo "Deviation over threshold. Executing pass" , iterations+1, "deviation", move.calibration.initial.deviation
         G30 P0 X30 Y30 Z-99999 ; probe near a leadscrew
-		G30 P1 X245 Y470 Z-99999 ; probe near a leadscrew
+		G30 P1 X250 Y470 Z-99999 ; probe near a leadscrew
 		G30 P2 X470 Y30 Z-99999 S3 ; probe near a leadscrew and calibrate 3 motors
         echo "Current deviation: " ^ move.calibration.initial.deviation
         continue

@@ -29,7 +29,7 @@ M569 P121.0 S0 D2											; physical drive 121.0 E goes forward
 ;----------------------------------
 ; Kenmatic mapping & resolution
 ;----------------------------------
-M584 X0.1 Y0.0 Z1.0:1.1:1.2 U0.2:0.3 E121.0					; set drive mapping
+M584 X0.1 Y0.0 Z1.0:1.1:1.2 U0.2:0.3 E121.0	P3				; set drive mapping Hide anything other than XYZ
 M350 X16 Y16 Z16 U16 E16 I1								    ; configure microstepping with interpolation
 M92 X80.00 Y80.00 Z800.00 U80 E690							; set steps per mm
 ; select Extended CoreXY mode. RatRig call this Hybrid
@@ -42,13 +42,13 @@ M669 K1 X1:1:0:0 Y1:-1:0:-1 Z0:0:1:0 U0:0:0:1
 ;----------------------------------
 
 ; Driver Current
-M906 X1200 Y1200 Z1200 U1200 E900 I30						; set motor currents (mA) and motor idle factor in per cent
+M906 X2000 Y2000 Z2000 U2000 E1200 I30						; set motor currents (mA) and motor idle factor in per cent
 M84 S30						        						; Set idle timeout
 
 ; Speed and Acceliration
-M566 X350.00 Y350.00 Z250.00 U350.00 E300.00				; set maximum instantaneous speed changes (mm/min) aka Jerk
-M203 X18000.00 Y18000.00 Z800.00 U18000.00 E7200.00			; set maximum speeds (mm/min)
-M201 X8000.00 Y8000.00 Z350.00 U8000.00 E5000				; set accelerations (mm/s^2)
+M566 X350.00 Y350.00 Z120.00 U350.00 E300.00				; set maximum instantaneous speed changes (mm/min) aka Jerk
+M203 X18000.00 Y18000.00 Z500.00 U18000.00 E7200.00			; set maximum speeds (mm/min)
+M201 X8000.00 Y8000.00 Z350.00 U8000.00 E5000   			; set accelerations (mm/s^2)
 ;M204 P4000 T6000                                           ; Training Wheels
 
 ; Axis Limits
@@ -62,7 +62,7 @@ M591 D0 P3 C"121.io1.in" S1 R70:130 L26.00 E12.0			; Duet3D rotating magnet sens
 
 ; Z-Probe
 M558 P8 C"121.io2.in" H15 F400:120 T18000 A6				; set Z probe type to unmodulated and the dive height + speeds
-G31 P500 X-28.3 Y-17.3 Z0									; set Z probe trigger value, offset and trigger height
+G31 P500 X0 Y27 Z0									; set Z probe trigger value, offset and trigger height
 
 M671 X-4.5:250:504.5 Y-4.52:505:-4.52 S5					; define positions of Z leadscrews or bed levelling screws
 M557 X30:470 Y30:470 P12									; define mesh grid
@@ -97,11 +97,11 @@ M955 P121.0 I10
 M563 P0 D0 H1 F0											; define tool 0
 G10 P0 X0 Y0 Z0												; set tool 0 axis offsets
 G10 P0 R0 S0												; set initial tool 0 active and standby temperatures to 0C
-;M207 S1.5 F7200 Z0.2										;firmware retraction
+M207 S1.5 F7200         									;firmware retraction
 
 ; Pressure Advance
-M572 D0 S0.034
-M593 P"zvddd" F50 S0.020
+M572 D0 S0.044
+M593 P"zvddd" F60 S0.020
 
 ; Miscellaneous
 M501														; load saved parameters from non-volatile memory

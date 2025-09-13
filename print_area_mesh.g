@@ -1,6 +1,6 @@
 ; This command will only create a mesh of the print area
 ; This will reduce the printing time considerably by only probing what is needed
-
+M401 ; explicitly go get the probe so we dont waste more time
 var deviationFromOriginal = 20
 
 var probeGridMinX = move.compensation.probeGrid.mins[0]
@@ -51,8 +51,8 @@ M118 P2 S{var.consoleMessage} ; send used probe grid to paneldue
 M118 P3 S{var.consoleMessage} ; send average to DWC console
 
 M557 X{var.pamMinX, var.pamMaxX} Y{var.pamMinY, var.pamMaxY} P{var.meshX, var.meshY}	; Set the probing mesh
-
 G0 X{var.pamMinX + ((var.pamMaxX - var.pamMinX)/2) - sensors.probes[0].offsets[0]} Y{var.pamMinY + ((var.pamMaxY - var.pamMinY)/2) - sensors.probes[0].offsets[1]} 	; Move to the center of the print area
+
 G30	; Set the z height for the center of the print area
 G29	; Probe the print area
 
@@ -60,4 +60,5 @@ G29	; Probe the print area
 set var.meshX = floor((var.probeGridMaxX - var.probeGridMinX) / var.meshSpacing + 1)
 set var.meshY = floor((var.probeGridMaxY - var.probeGridMinY) / var.meshSpacing + 1)
 M557 X{var.probeGridMinX, var.probeGridMaxX} Y{var.probeGridMinY, var.probeGridMaxY} P{var.meshX, var.meshY}
+M402 ; put probe way as we should be done with it.
 
