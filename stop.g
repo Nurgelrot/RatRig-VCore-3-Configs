@@ -1,3 +1,4 @@
+; Sat Sep 13 11:19:40 AM MDT 2025
 ; stop.g
 ; called when M0 (Stop) is run (e.g. when a print from SD card is cancelled)
 ;

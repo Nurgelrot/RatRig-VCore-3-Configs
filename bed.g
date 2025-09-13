@@ -1,3 +1,4 @@
+; Sat Sep 13 11:19:40 AM MDT 2025
 M290 R0 S0    ;  clear baby stepping
 M561          ;  reset all bed adjustments
 M400 S1         ;  flush move queue
